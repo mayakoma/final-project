@@ -1,0 +1,30 @@
+.navigation {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.714);
+  color: #fff;
+  height: 6rem;
+  font-size: 2rem;
+  gap: 15rem;
+  align-items: center;
+  z-index: 10;
+}
+.navigation_title {
+  padding: 0 10rem 0 5rem;
+  display: flex;
+  flex: 50%;
+  font-family: "Shadows Into Light", cursive;
+}
+.navigation_title h1 {
+  color: #fff;
+}
+.navigation_auth {
+  display: flex;
+  flex: 50%;
+}
+
+.navigation_pageslink,
+.navigation_authLink {
+  flex: 1;
+}
