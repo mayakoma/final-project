@@ -19,12 +19,22 @@
 .navigation_title h1 {
   color: #fff;
 }
-.navigation_auth {
+.navigation_links {
   display: flex;
   flex: 50%;
+  color: #fff;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.navigation_links a {
+  color: #fff;
+  text-decoration: none;
 }
 
-.navigation_pageslink,
-.navigation_authLink {
+.navigation_links li {
   flex: 1;
+}
+.navigation_links li:hover {
+  text-decoration: underline 0.5rem;
 }

@@ -1,0 +1,29 @@
+.Search {
+  width: 40%;
+  height: 3rem;
+
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+
+.Search_data {
+  flex: 85%;
+  background-color: #f8f8f8;
+  padding: 0.35rem 0.5rem;
+  box-sizing: border-box;
+  border: 0.25rem solid #ccc;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  resize: none;
+}
+.Search_button {
+  flex: 15%;
+  background-color: rgba(0, 0, 0, 0.831);
+  color: #fff;
+  border-radius: 0.5rem;
+  border: #000 solid;
+}
+.Search_button:hover {
+  background-color: rgba(0, 0, 0, 0.406);
+}

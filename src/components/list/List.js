@@ -1,8 +1,9 @@
 import React from "react";
+import Search from "../search/Search";
 import "./List.css";
 
 const List = function () {
-  return <h1> list</h1>;
+  return <Search />;
 };
 
 export default List;
