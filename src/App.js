@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <Navigation />
         <img
-          src="https://www.tastingtable.com/img/gallery/the-best-ways-to-keep-donuts-fresh/intro-1642795858.webp"
+          src="https://cohanimbakery.co.il/f-users/user_105071/website_105732/images/thumbs/W_960_240a8042_lr.jpg"
           className="app_img"
         />
         <div className="App_bodyConteiner">
