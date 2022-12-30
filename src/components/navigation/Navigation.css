@@ -12,6 +12,7 @@
 }
 .navigation_title {
   padding: 0 10rem 0 5rem;
+
   display: flex;
   flex: 50%;
   font-family: "Shadows Into Light", cursive;

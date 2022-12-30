@@ -3,6 +3,8 @@ import "./App.css";
 import Checkout from "./components/checkout/Checkout";
 import Footer from "./components/footer/footer";
 import List from "./components/list/List";
+import Login from "./components/login/Login";
+import Signup from "./components/signup/Signup";
 import Navigation from "./components/navigation/Navigation";
 
 function App() {
@@ -16,8 +18,11 @@ function App() {
         />
         <div className="App_bodyConteiner">
           <Routes>
-            <Route path="/list" element={<List />} />
+            <Route path="/" element={<List />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/profile/:id" element="" />
           </Routes>
         </div>
         <Footer />

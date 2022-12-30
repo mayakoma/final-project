@@ -1,0 +1,18 @@
+.button {
+  font-family: inherit;
+  margin: 2.5rem auto;
+  width: 30%;
+  text-align: center;
+  border: none;
+  background-color: #a66a3ff3;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 2rem;
+}
+
+.button:hover {
+  transform: scale(1.1);
+  box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(116, 112, 112);
+}
