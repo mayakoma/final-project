@@ -5,6 +5,7 @@ function Button(props) {
   return (
     <button className="button" onClick={props.onClick}>
       {props.title}
+      {props.children}
     </button>
   );
 }

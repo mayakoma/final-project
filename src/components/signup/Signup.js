@@ -15,7 +15,6 @@ function Signup() {
   const userName = useRef({ value: "" });
   const userPassword = useRef({ value: "" });
   const userEmail = useRef({ value: "" });
-  const userArea = useRef({ value: "" });
 
   const [checked, setChecked] = useState(false);
   const [radioGender, setRadioGender] = useState("women");
@@ -46,7 +45,7 @@ function Signup() {
     { name: "south", value: "south" },
   ];
 
-  const loginHandler = () => {
+  const signUpHandler = () => {
     setFirstTime(true);
     let name = userName.current.value;
     let password = userPassword.current.value;
@@ -141,8 +140,8 @@ function Signup() {
         </ButtonGroup>
       </div>
 
-      <Button onClick={loginHandler} title="Sign Up" />
-      <p className="login__acount">You already have an acount ?</p>
+      <Button onClick={signUpHandler} title="Sign Up" />
+      <p className="login__acount">Already have an acount ?</p>
       <Button onClick={logInHandler} title="Log In" />
     </div>
   );

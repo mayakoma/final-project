@@ -1,5 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import Search from "../search/Search";
+import Button from "../Button/Button";
 import "./Navigation.css";
 
 const Navigation = function () {
@@ -9,7 +12,7 @@ const Navigation = function () {
         <NavLink to="/">Website's name</NavLink>
         {/* <h1>Website's name</h1> */}
       </div>
-
+      <Search />
       <ul className="navigation_links">
         <li>
           <NavLink to="/login">Log In</NavLink>
@@ -18,7 +21,15 @@ const Navigation = function () {
           <NavLink to="/signup">SignUp</NavLink>
         </li>
         <li>
-          <NavLink to="/list">Products</NavLink>
+          <NavLink to="/checkout">
+            <Button className="toCart_btn">
+              <span className="shoppin__icon">
+                <FaShoppingCart />
+              </span>
+              <span>Your Cart</span>
+              <span className="shopping__amount">0</span>
+            </Button>
+          </NavLink>
         </li>
       </ul>
     </div>
