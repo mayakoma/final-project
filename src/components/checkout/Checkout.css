@@ -31,4 +31,7 @@
 
 .checkout__title {
   margin-bottom: 5rem;
+  margin: auto;
+  align-self: center;
+  text-align: center;
 }
