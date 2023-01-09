@@ -2,14 +2,29 @@ import React from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
+import { useStateValue } from "../../context/StateProvider";
 import Button from "../Button/Button";
 import "./ChosenProduct.css";
 
 function ChosenProduct(props) {
+  const [state, dispatch] = useStateValue();
   const index = useParams().index;
   const productFromList = props.products.find((p) => p.id == index);
 
-  const addToBasket = () => {};
+  const addToBasket = () => {
+    dispatch({
+      type: "ADD_TO_BASKET",
+      item: {
+        id: productFromList.id,
+        title: productFromList.title,
+        amount: 1,
+        price: productFromList.price,
+        description: productFromList.description,
+        image: productFromList.image,
+      },
+      title: productFromList.title,
+    });
+  };
 
   return (
     <div className="chosenProduct__container">

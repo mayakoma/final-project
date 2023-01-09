@@ -1,4 +1,6 @@
 import React from "react";
+import { useStateValue } from "../../context/StateProvider";
+import { getBasketItemAmount } from "../../context/reducer";
 import { NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import Search from "../search/Search";
@@ -6,6 +8,7 @@ import Button from "../Button/Button";
 import "./Navigation.css";
 
 const Navigation = function () {
+  const [{ basket }, dispatch] = useStateValue();
   return (
     <div className="navigation">
       <div className="navigation_title">
@@ -27,7 +30,9 @@ const Navigation = function () {
                 <FaShoppingCart />
               </span>
               <span>Your Cart</span>
-              <span className="shopping__amount">0</span>
+              <span className="shopping__amount">
+                {getBasketItemAmount(basket)}
+              </span>
             </Button>
           </NavLink>
         </li>
