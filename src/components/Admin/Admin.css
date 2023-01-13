@@ -1,0 +1,23 @@
+.Admin_title {
+  color: black;
+  width: 100%;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 6rem;
+}
+.Admin_userSearchContenier {
+  display: flex;
+  margin: auto;
+  width: 50%;
+}
+.Admin_userSearchTitle {
+  flex: 35%;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 3rem;
+}
+.Admin_userSearch {
+  flex: 65%;
+  width: 100%;
+}
+.Admin_Search {
+  width: 100%;
+}

@@ -7,6 +7,7 @@ import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import Navigation from "./components/navigation/Navigation";
 import ChosenProduct from "./components/ChosenProduct/ChosenProduct";
+import Admin from "./components/Admin/Admin";
 
 const productsList = [
   {
@@ -89,7 +90,7 @@ function App() {
             <Route path="/" element={<List products={productsList} />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin" element="" />
+            <Route path="/admin" element={<Admin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile/:id" element="" />
             <Route

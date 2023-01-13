@@ -15,7 +15,7 @@ const Navigation = function () {
         <NavLink to="/">Website's name</NavLink>
         {/* <h1>Website's name</h1> */}
       </div>
-      <Search />
+      <div className="navigation_search"><Search /></div>
       <ul className="navigation_links">
         <li>
           <NavLink to="/login">Log In</NavLink>
