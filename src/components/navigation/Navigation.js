@@ -24,6 +24,9 @@ const Navigation = function () {
           <NavLink to="/signup">SignUp</NavLink>
         </li>
         <li>
+          <NavLink to="/admin">Admin</NavLink>
+        </li>
+        <li>
           <NavLink to="/checkout">
             <Button className="toCart_btn">
               <span className="shoppin__icon">

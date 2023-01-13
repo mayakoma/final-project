@@ -89,6 +89,7 @@ function App() {
             <Route path="/" element={<List products={productsList} />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/admin" element="" />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile/:id" element="" />
             <Route
