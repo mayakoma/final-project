@@ -4,17 +4,20 @@
   font-family: "Shadows Into Light", cursive;
   font-size: 6rem;
 }
-.Admin_userSearchContenier {
+.Admin_userSearchContenier,
+.Admin_ordersSearchContenier {
   display: flex;
   margin: auto;
   width: 50%;
 }
-.Admin_userSearchTitle {
+.Admin_userSearchTitle,
+.Admin_ordersSearchTitle {
   flex: 35%;
   font-family: "Shadows Into Light", cursive;
   font-size: 3rem;
 }
-.Admin_userSearch {
+.Admin_userSearch,
+.Admin_ordersSearch {
   flex: 65%;
   width: 100%;
 }
