@@ -27,14 +27,15 @@
 .Admin_usersInfo {
   width: 50%;
   margin: auto;
+  display: flex;
 }
 .showDetails_userItem {
   margin-top: 1rem;
   text-align: left;
   display: flex;
   flex-direction: row;
-  flex: 20%;
-  height: 6rem;
+  flex: 50%;
+  height: 10rem;
 }
 .showDetails_info {
   flex: 80%;
@@ -42,7 +43,7 @@
 .ShowDetails_btns {
   display: flex;
   flex: 20%;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: column;
 }
 .showDetails_btn {
@@ -51,6 +52,7 @@
 }
 .showDetails {
   display: flex;
+  flex: 50%;
   flex-direction: row;
   gap: 1rem;
 }

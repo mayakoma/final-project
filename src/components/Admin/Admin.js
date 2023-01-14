@@ -45,7 +45,7 @@ function Admin() {
         </div>
       </div>
       <div className="Admin_usersInfo">
-        {usersList == [] ? (
+        {!usersList ? (
           <LoadingSpinner />
         ) : (
           <ShowDetails list={usersList || []} />
@@ -61,7 +61,7 @@ function Admin() {
         {ordersList == [] ? (
           <LoadingSpinner />
         ) : (
-          <ShowOrders list={ordersList || []} />
+          <ShowOrders list={ordersList} />
         )}
       </div>
       <Button> Add Product</Button>
