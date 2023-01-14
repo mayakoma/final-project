@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
+import { useHttpClient } from "../../Hook/HttppHook";
 import "./Login.css";
 
 function Login() {
@@ -9,8 +10,9 @@ function Login() {
   const [validPassword, setValidPassword] = useState(true);
   const userName = useRef({ value: "" });
   const userPassword = useRef({ value: "" });
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const loginHandler = () => {
+  const loginHandler = async () => {
     let name = userName.current.value;
     let password = userPassword.current.value;
     if (name.length == 0) {
@@ -21,6 +23,20 @@ function Login() {
     }
 
     if (!validName && !validPassword) {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/user/login`,
+          "POST",
+          JSON.stringify({
+            email: name,
+            password: password,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+      } catch (err) {}
       navigate("/");
     }
   };
