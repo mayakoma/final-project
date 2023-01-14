@@ -57,7 +57,7 @@ function Admin() {
           <Search className="Admin_Search" />
         </div>
       </div>
-      <div className="Admin_usersInfo">
+      <div className="Admin_ordersInfo">
         {ordersList == [] ? (
           <LoadingSpinner />
         ) : (

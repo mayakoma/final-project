@@ -23,16 +23,16 @@ function ShowOrders({ list }) {
   if (!list || list == [] || list.length === 0) return null;
   else
     return (
-      <ul className="showDetails">
+      <ul className="showOrders">
         {list.map((l, i) => (
-          <li key={i} className="showDetails_userItem">
-            <div className="showDetails_info">
+          <li key={i} className="showOrders_orderItem">
+            <div className="showOrders_info">
               <p>orderNumber: {l.orderDetailes._id}</p>
               <p>Date: {l.orderDetailes.orderDate}</p>
               <p>address: {l.orderDetailes.address}</p>
               <p>total Price: {l.orderDetailes.totalPrice}</p>
             </div>
-            <p className="ShowDetails_btns">
+            <div className="ShowDetails_btns">
               <button className="showDetails_btn">edit</button>
               <button
                 className="showDetails_btn"
@@ -42,7 +42,7 @@ function ShowOrders({ list }) {
               >
                 delete
               </button>
-            </p>
+            </div>
           </li>
         ))}
       </ul>
