@@ -1,0 +1,63 @@
+.Admin_title {
+  color: black;
+  width: 100%;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 6rem;
+}
+.Admin_userSearchContenier,
+.Admin_ordersSearchContenier {
+  display: flex;
+  margin: auto;
+  width: 50%;
+}
+.Admin_userSearchTitle,
+.Admin_ordersSearchTitle {
+  flex: 35%;
+  font-family: "Shadows Into Light", cursive;
+  font-size: 3rem;
+}
+.Admin_userSearch,
+.Admin_ordersSearch {
+  flex: 65%;
+  width: 100%;
+}
+.Admin_Search {
+  width: 100%;
+}
+.Admin_usersInfo {
+  width: 50%;
+  margin: auto;
+  display: flex;
+}
+.showDetails_userItem {
+  margin-top: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  flex: 50%;
+  height: 10rem;
+}
+.showDetails_info {
+  flex: 80%;
+}
+.ShowDetails_btns {
+  display: flex;
+  flex: 20%;
+  gap: 2rem;
+  flex-direction: column;
+}
+.showDetails_btn {
+  flex: 1;
+  border-radius: 3rem;
+}
+.showDetails {
+  display: flex;
+  flex: 50%;
+  flex-direction: row;
+  gap: 1rem;
+}
+.showDetails_delBtn {
+  flex: 20%;
+  border-radius: 3rem;
+  height: 30%;
+}
