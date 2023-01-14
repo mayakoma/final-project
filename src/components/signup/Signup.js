@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
+import { useHttpClient } from "../../Hook/HttppHook";
 import "./Signup.css";
 
 function Signup() {
@@ -19,6 +20,7 @@ function Signup() {
   const [checked, setChecked] = useState(false);
   const [radioGender, setRadioGender] = useState("women");
   const [radioArea, setRadioArea] = useState("north");
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const logInHandler = () => {
     navigate("/login");
@@ -45,7 +47,7 @@ function Signup() {
     { name: "south", value: "south" },
   ];
 
-  const signUpHandler = () => {
+  const signUpHandler = async () => {
     setFirstTime(true);
     let name = userName.current.value;
     let password = userPassword.current.value;
@@ -59,7 +61,25 @@ function Signup() {
     if (validator.isEmail(email)) {
       setValidEmail(true);
     }
+
     if (validName && validPassword && validEmail) {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/user/signup`,
+          "POST",
+          JSON.stringify({
+            email: email,
+            password: password,
+            userName: name,
+            area: radioArea,
+            gender: radioGender,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+      } catch (err) {}
       navigate("/");
     }
   };
