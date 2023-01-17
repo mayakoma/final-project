@@ -6,6 +6,7 @@ import List from "./components/list/List";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import Navigation from "./components/navigation/Navigation";
+import Graph from "./components/graph/Graph";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile/:id" element="" />
+            <Route path="/graph" element={<Graph/>} />
           </Routes>
         </div>
         <Footer />
