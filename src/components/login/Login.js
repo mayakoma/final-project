@@ -23,20 +23,6 @@ function Login() {
     }
 
     if (!validName && !validPassword) {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:3001/user/login`,
-          "POST",
-          JSON.stringify({
-            email: name,
-            password: password,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-      } catch (err) {}
       navigate("/");
     }
   };
