@@ -11,7 +11,7 @@ const List = function ({ products }) {
         return (
           <>
             <Product
-              id={product.id}
+              id={product._id}
               title={product.title}
               price={product.price}
               image={product.image}

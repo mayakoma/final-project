@@ -1,14 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { useHttpClient } from "../../Hook/HttppHook";
+import { DataContext } from "../../context/data-context";
+
 import "./Signup.css";
 
 function Signup() {
   const navigate = useNavigate();
+  const auth = useContext(DataContext);
   const [firstTime, setFirstTime] = useState(false);
   const [validName, setValidName] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
@@ -63,23 +66,8 @@ function Signup() {
     }
 
     if (validName && validPassword && validEmail) {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:3001/user/signup`,
-          "POST",
-          JSON.stringify({
-            email: email,
-            password: password,
-            userName: name,
-            area: radioArea,
-            gender: radioGender,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-      } catch (err) {}
+      auth.login();
+
       navigate("/");
     }
   };

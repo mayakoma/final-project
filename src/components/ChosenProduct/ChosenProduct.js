@@ -9,7 +9,7 @@ import "./ChosenProduct.css";
 function ChosenProduct(props) {
   const [state, dispatch] = useStateValue();
   const index = useParams().index;
-  const productFromList = props.products.find((p) => p.id == index);
+  const productFromList = props.products.find((p) => p._id === index);
 
   const addToBasket = () => {
     dispatch({

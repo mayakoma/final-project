@@ -1,11 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import { useHttpClient } from "../../Hook/HttppHook";
+import { DataContext } from "../../context/data-context";
+
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
+  const auth = useContext(DataContext);
   const [validName, setValidName] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
   const userName = useRef({ value: "" });
@@ -23,6 +26,7 @@ function Login() {
     }
 
     if (!validName && !validPassword) {
+      auth.login();
       navigate("/");
     }
   };
