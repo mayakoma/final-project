@@ -1,11 +1,12 @@
 import React, { useState, useRef } from "react";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
+import { useHttpClient } from "../../Hook/HttppHook";
 import "./AddProductForm.css";
 
 function AddProductForm() {
   const navigate = useNavigate();
-
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [validName, setValidName] = useState(true);
   const [validPrice, setValidPrice] = useState(true);
   const [validImg, setValidImg] = useState(true);
@@ -51,6 +52,22 @@ function AddProductForm() {
     }
 
     if (!firstTime && validName && validPrice && validImg && validDesc) {
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/product/add`,
+          "POST",
+          JSON.stringify({
+            title: name,
+            description: description,
+            image: img,
+            price: price,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+      } catch (err) {}
       navigate("/");
     }
   };
