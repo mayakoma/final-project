@@ -1,28 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
+import { useHttpClient } from "../../Hook/HttppHook";
+
 import Button from "../Button/Button";
 import "./ChosenProduct.css";
 
 function ChosenProduct(props) {
   const [state, dispatch] = useStateValue();
+  const [productEl, setProductEl] = useState("");
+
   const index = useParams().index;
-  const productFromList = props.products.find((p) => p._id === index);
+  // const productFromList = props.products.find((p) => p._id === index);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  useEffect(() => {
+    getProduct();
+    console.log(productEl);
+  }, []);
+
+  const getProduct = async () => {
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:3001/product/getById`,
+        "POST",
+        JSON.stringify({
+          pid: index,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      setProductEl(responseData);
+      console.log(responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const addToBasket = () => {
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
-        id: productFromList.id,
-        title: productFromList.title,
+        id: productEl._id,
+        title: productEl.title,
         amount: 1,
-        price: productFromList.price,
-        description: productFromList.description,
-        image: productFromList.image,
+        price: productEl.price,
+        description: productEl.description,
+        image: productEl.image,
       },
-      title: productFromList.title,
+      title: productEl.title,
     });
   };
 
@@ -31,16 +60,14 @@ function ChosenProduct(props) {
       <Link to="/">
         <IoMdArrowBack className="chosenProduct__back" />
       </Link>
-      <div className="chosenProduct__title">{productFromList.title}</div>
-      <img src={productFromList.image} className="chosenProduct__img" />
+      <div className="chosenProduct__title">{productEl[1]}</div>
+      <img src={productEl.image} className="chosenProduct__img" />
 
       <div className="chosenProduct__details">
         <div className="chosenProduct__description">
-          {productFromList.description}
+          {productEl.description}
         </div>
-        <div className="chosenProduct__price">
-          price : {productFromList.price}$
-        </div>
+        <div className="chosenProduct__price">price : {productEl.price}$</div>
       </div>
       <Button
         className="chosenProduct__button"
