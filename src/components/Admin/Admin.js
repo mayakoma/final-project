@@ -6,7 +6,7 @@ import { useHttpClient } from "../../Hook/HttppHook";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 import "./Admin.css";
-import Button from "../Button/Button";
+import AddProductForm from "../AddProductForm/AddProductForm";
 
 function Admin() {
   const [usersList, setUsersList] = useState([]);
@@ -64,7 +64,7 @@ function Admin() {
           <ShowOrders list={ordersList} />
         )}
       </div>
-      <Button> Add Product</Button>
+      <AddProductForm />
     </div>
   );
 }

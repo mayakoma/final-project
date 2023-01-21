@@ -1,15 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import validator from "validator";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { useHttpClient } from "../../Hook/HttppHook";
+import { DataContext } from "../../context/data-context";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { authFirebase } from "../../Firebase/Firebase";
+
 import "./Signup.css";
 
 function Signup() {
   const navigate = useNavigate();
-  const [firstTime, setFirstTime] = useState(false);
+  const auth = useContext(DataContext);
+  const [firstTime, setFirstTime] = useState(true);
   const [validName, setValidName] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -48,38 +53,43 @@ function Signup() {
   ];
 
   const signUpHandler = async () => {
-    setFirstTime(true);
+    setFirstTime(false);
     let name = userName.current.value;
     let password = userPassword.current.value;
     let email = userEmail.current.value;
     if (name.length !== 0) {
       setValidName(true);
     }
-    if (password.length > 5) {
+
+    if (name.length === 0) {
+      setValidName(false);
+    }
+
+    if (password.length > 6) {
       setValidPassword(true);
     }
+
+    if (password.length < 6) {
+      setValidPassword(false);
+    }
+
     if (validator.isEmail(email)) {
       setValidEmail(true);
     }
 
-    if (validName && validPassword && validEmail) {
-      try {
-        const responseData = await sendRequest(
-          `http://localhost:3001/user/signup`,
-          "POST",
-          JSON.stringify({
-            email: email,
-            password: password,
-            userName: name,
-            area: radioArea,
-            gender: radioGender,
-          }),
-          {
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-      } catch (err) {}
+    if (!validator.isEmail(email)) {
+      setValidEmail(false);
+    }
+
+    if (!firstTime && validName && validPassword && validEmail) {
+      auth.login();
+      createUserWithEmailAndPassword(authFirebase, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       navigate("/");
     }
   };
@@ -87,33 +97,33 @@ function Signup() {
     <div className="login">
       <h1>Sign Up</h1>
       <input
-        className="login__userName"
-        type="text"
-        placeholder="user name"
-        ref={userName}
-      />
-      {firstTime && !validName && (
-        <p className="login__valid">Please enter your name</p>
-      )}
-      <input
-        className="login__password"
-        type="text"
-        placeholder="password"
-        ref={userPassword}
-      />
-      {firstTime && !validPassword && (
-        <p className="login__valid">
-          Please enter a password longer than 6 characters{" "}
-        </p>
-      )}
-      <input
         className="login__email"
         type="email"
         placeholder="email"
         ref={userEmail}
       />
-      {firstTime && !validEmail && (
+      {!firstTime && !validEmail && (
         <p className="login__valid">Please enter correct email</p>
+      )}
+      <input
+        className="login__userName"
+        type="text"
+        placeholder="user name"
+        ref={userName}
+      />
+      {!firstTime && !validName && (
+        <p className="login__valid">Please enter your name</p>
+      )}
+      <input
+        className="login__password"
+        type="password"
+        placeholder="password"
+        ref={userPassword}
+      />
+      {!firstTime && !validPassword && (
+        <p className="login__valid">
+          Please enter a password longer than 6 characters{" "}
+        </p>
       )}
 
       <div className="signup__radio">

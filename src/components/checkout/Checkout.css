@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 4rem;
+  padding: 15px 75px;
 }
 
 .checkout {
@@ -34,4 +35,7 @@
   margin: auto;
   align-self: center;
   text-align: center;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
 }

@@ -5,6 +5,7 @@
   align-items: center;
   border: 0.2rem solid black;
   background-color: white;
+  padding: 15px 25px;
 }
 
 .checkoutProduct__info {
@@ -17,6 +18,9 @@
 .checkoutProduct__amountDetils {
   display: flex;
   justify-content: space-between;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
 }
 
 .checkoutProduct__btn-plus {
@@ -48,7 +52,7 @@
 
 .checkoutProduct__title {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 600;
   margin-bottom: 0.7rem;
 }
 
@@ -59,7 +63,8 @@
 }
 
 .checkoutProduct__price {
-  font-size: 2.5rem;
+  font-size: 2rem;
+  font-weight: 400;
   margin-top: 0.8rem;
 }
 
@@ -71,7 +76,7 @@
   border: 0.2rem solid black;
   padding: 0.5rem;
   font-family: inherit;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: 600;
   display: inline-block;
 }
