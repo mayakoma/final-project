@@ -5,9 +5,13 @@ import { useHttpClient } from "../../Hook/HttppHook";
 import { DataContext } from "../../context/data-context";
 import validator from "validator";
 import { authFirebase } from "../../Firebase/Firebase";
+// import { io } from "socket.io-client";
 
 import "./Login.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
+// console.log("io");
+// socket.on
 
 function Login() {
   const navigate = useNavigate();
@@ -50,6 +54,9 @@ function Login() {
           if (email == emailAdmin) {
             auth.adminIn();
           }
+          // socket.on("login", () => {
+          //   console.log("connect +1");
+          // });
           navigate("/");
         })
         .catch((error) => {
