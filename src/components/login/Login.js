@@ -4,8 +4,10 @@ import Button from "../Button/Button";
 import { useHttpClient } from "../../Hook/HttppHook";
 import { DataContext } from "../../context/data-context";
 import validator from "validator";
+import { authFirebase } from "../../Firebase/Firebase";
 
 import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 function Login() {
   const navigate = useNavigate();
@@ -13,6 +15,8 @@ function Login() {
   const [firstTime, setFirstTime] = useState(true);
   const [validEmail, setValidEmail] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
+  const [userNotFound, setUserNotFound] = useState(false);
+
   const userEmail = useRef({ value: "" });
   const userPassword = useRef({ value: "" });
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -20,7 +24,7 @@ function Login() {
   const loginHandler = async () => {
     let email = userEmail.current.value;
     let password = userPassword.current.value;
-    const emailAdmin = "noyflaysher@gmail.com";
+    const emailAdmin = "noyf@gmail.com";
 
     setFirstTime(false);
 
@@ -30,9 +34,6 @@ function Login() {
 
     if (validator.isEmail(email)) {
       setValidEmail(true);
-      if (email == emailAdmin) {
-        auth.adminIn();
-      }
     }
     if (password.length < 6) {
       setValidPassword(false);
@@ -42,8 +43,19 @@ function Login() {
     }
 
     if (!firstTime && validEmail && validPassword) {
-      auth.login();
-      navigate("/");
+      signInWithEmailAndPassword(authFirebase, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+          auth.login();
+          if (email == emailAdmin) {
+            auth.adminIn();
+          }
+          navigate("/");
+        })
+        .catch((error) => {
+          setUserNotFound(true);
+          console.log(error);
+        });
     }
   };
 
@@ -59,7 +71,7 @@ function Login() {
       {!validEmail && <p className="login__valid">Please enter valid email</p>}
       <input
         className="login__password"
-        type="text"
+        type="password"
         placeholder="password"
         ref={userPassword}
       />
@@ -70,6 +82,11 @@ function Login() {
         </p>
       )}
       <Button onClick={loginHandler} title="Log In" />
+      {userNotFound && (
+        <p className="login__valid">
+          The user isn't exist, you need to sign up or your details wrong
+        </p>
+      )}
     </div>
   );
 }

@@ -6,6 +6,8 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import { useHttpClient } from "../../Hook/HttppHook";
 import { DataContext } from "../../context/data-context";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { authFirebase } from "../../Firebase/Firebase";
 
 import "./Signup.css";
 
@@ -81,6 +83,13 @@ function Signup() {
 
     if (!firstTime && validName && validPassword && validEmail) {
       auth.login();
+      createUserWithEmailAndPassword(authFirebase, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       navigate("/");
     }
   };
@@ -107,7 +116,7 @@ function Signup() {
       )}
       <input
         className="login__password"
-        type="text"
+        type="password"
         placeholder="password"
         ref={userPassword}
       />
