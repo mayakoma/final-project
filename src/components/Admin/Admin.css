@@ -25,11 +25,14 @@
   width: 100%;
 }
 .Admin_usersInfo {
-  width: 50%;
   margin: auto;
   display: flex;
   margin-top: 3rem;
   margin-bottom: 3rem;
+  justify-content: space-evenly;
+  padding: 32px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 .showDetails_userItem {
   margin-top: 1rem;
@@ -41,6 +44,7 @@
 }
 .showDetails_info {
   flex: 80%;
+  margin-bottom: 20px;
 }
 .ShowDetails_btns {
   flex: 20%;
