@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./App.css";
 import React, {
   useRef,
@@ -8,6 +14,7 @@ import React, {
   useEffect,
 } from "react";
 import { useHttpClient } from "./Hook/HttppHook";
+// import { Navigate } from "react-router-dom";
 
 import Checkout from "./components/Checkout/Checkout";
 import Footer from "./components/footer/footer";

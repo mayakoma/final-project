@@ -20,6 +20,7 @@ function Login() {
   const loginHandler = async () => {
     let email = userEmail.current.value;
     let password = userPassword.current.value;
+    const emailAdmin = "noyflaysher@gmail.com";
 
     setFirstTime(false);
 
@@ -29,6 +30,9 @@ function Login() {
 
     if (validator.isEmail(email)) {
       setValidEmail(true);
+      if (email == emailAdmin) {
+        auth.adminIn();
+      }
     }
     if (password.length < 6) {
       setValidPassword(false);

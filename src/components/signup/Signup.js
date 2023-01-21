@@ -93,7 +93,7 @@ function Signup() {
         placeholder="email"
         ref={userEmail}
       />
-      {firstTime && !validEmail && (
+      {!firstTime && !validEmail && (
         <p className="login__valid">Please enter correct email</p>
       )}
       <input
@@ -102,7 +102,7 @@ function Signup() {
         placeholder="user name"
         ref={userName}
       />
-      {firstTime && !validName && (
+      {!firstTime && !validName && (
         <p className="login__valid">Please enter your name</p>
       )}
       <input
@@ -111,7 +111,7 @@ function Signup() {
         placeholder="password"
         ref={userPassword}
       />
-      {firstTime && !validPassword && (
+      {!firstTime && !validPassword && (
         <p className="login__valid">
           Please enter a password longer than 6 characters{" "}
         </p>
