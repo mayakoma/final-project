@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { getBasketTotal } from "../../context/reducer";
@@ -9,9 +9,13 @@ import Button from "../Button/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import validator from "validator";
+import { DataContext } from "../../context/data-context";
 
 function Subtotal() {
   const [{ basket }, dispatch] = useStateValue();
+  const auth = useContext(DataContext);
+
   const nameRef = useRef({ value: "" });
   const emailRef = useRef({ value: "" });
   const navigate = useNavigate();
@@ -21,10 +25,7 @@ function Subtotal() {
   const [message, setMessage] = useState("");
 
   const checkoutDone = async () => {
-    var validRegex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if (name != "" && email.match(validRegex) && basket.length > 0) {
+    if (name !== "" && validator.isEmail(email) && basket.length > 0) {
       basket.map((item) => {
         dispatch({
           type: "REMOVE_FROM_BASKET",
@@ -33,22 +34,18 @@ function Subtotal() {
       });
       console.log("done");
       console.log(basket);
-      // const requestOption = {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     email: email,
-      //     userName: name,
-      //     shoppintCart: basket,
-      //   }),
-      // };
-      // fetch("http://localhost:5000/user/checkout", requestOption)
-      //   .then((response) => (response.ok ? response.json() : { message: "" }))
-      //   .then((data) => {
-      //     setMessage(data.message);
-      //   });
+      setOpen(true);
+    }
+
+    if (auth.isLoggedIn && basket.length > 0) {
+      basket.map((item) => {
+        dispatch({
+          type: "REMOVE_FROM_BASKET",
+          title: item.title,
+        });
+      });
+      console.log("done");
+      console.log(basket);
       setOpen(true);
     }
   };
@@ -80,22 +77,25 @@ function Subtotal() {
         Subtotal ({getBasketItemAmount(basket)} items):{" "}
         <strong>$ {getBasketTotal(basket).toFixed(2)}</strong>
       </p>
-      <div className="subtotal__details">
-        <label className="subtotal__name">Name</label>
-        <input
-          className="subtotal__name-input"
-          type="text"
-          ref={nameRef}
-          placeholder="enter your name"
-        />
-        <label className="subtotal__email">Email</label>
-        <input
-          className="subtotal__email-input"
-          type="text"
-          ref={emailRef}
-          placeholder="enter your email"
-        />
-      </div>
+      {!auth.isLoggedIn && (
+        <div className="subtotal__details">
+          <label className="subtotal__name">Name</label>
+          <input
+            className="subtotal__name-input"
+            type="text"
+            ref={nameRef}
+            placeholder="enter your name"
+          />
+          <label className="subtotal__email">Email</label>
+          <input
+            className="subtotal__email-input"
+            type="text"
+            ref={emailRef}
+            placeholder="enter your email"
+          />
+        </div>
+      )}
+
       <Button
         title="Checkout"
         onClick={checkoutDone}

@@ -66,7 +66,7 @@ function CheckoutProduct({ title, image, price, amount, id, description }) {
         </div>
         <p className="checkoutProduct__price">
           <small>$</small>
-          <strong>{(price * amount).toFixed(2)}</strong>
+          {(price * amount).toFixed(2)}
         </p>
         <Button
           className="checkoutProduct__remove"
