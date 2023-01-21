@@ -25,75 +25,78 @@ import Navigation from "./components/navigation/Navigation";
 import ChosenProduct from "./components/ChosenProduct/ChosenProduct";
 import Admin from "./components/Admin/Admin";
 import { DataContext } from "./context/data-context";
+import { io } from "socket.io-client";
 
 import { AddCommentOutlined } from "@mui/icons-material";
 
-const productsList = [
-  {
-    id: "1",
-    title: "bread",
-    price: "20",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-  {
-    id: "2",
-    title: "corasun",
-    price: "10",
-    image:
-      "https://st1.foodsd.co.il/Images/Recipes/xxl/Recipe-6429-HdKoeWt7mj6rsvnk.jpg",
-    description: "description about bread",
-  },
-  {
-    id: "3",
-    title: "pita",
-    price: "2",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-  {
-    id: "4",
-    title: "cake",
-    price: "29.9",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-  {
-    id: "5",
-    title: "cokkie",
-    price: "19.9",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-  {
-    id: "6",
-    title: "cake2",
-    price: "29.9",
-    image:
-      "https://cdn.goodlifetv.co.il/wp-content/uploads/2021/08/09183655/AdobeStock_380794710.jpg",
-    description: "description about bread",
-  },
-  {
-    id: "7",
-    title: "oreo coookie",
-    price: "29.9",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-  {
-    id: "8",
-    title: "snikers",
-    price: "29.9",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
-    description: "description about bread",
-  },
-];
+// const productsList = [
+//   {
+//     id: "1",
+//     title: "bread",
+//     price: "20",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "2",
+//     title: "corasun",
+//     price: "10",
+//     image:
+//       "https://st1.foodsd.co.il/Images/Recipes/xxl/Recipe-6429-HdKoeWt7mj6rsvnk.jpg",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "3",
+//     title: "pita",
+//     price: "2",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "4",
+//     title: "cake",
+//     price: "29.9",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "5",
+//     title: "cokkie",
+//     price: "19.9",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "6",
+//     title: "cake2",
+//     price: "29.9",
+//     image:
+//       "https://cdn.goodlifetv.co.il/wp-content/uploads/2021/08/09183655/AdobeStock_380794710.jpg",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "7",
+//     title: "oreo coookie",
+//     price: "29.9",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+//   {
+//     id: "8",
+//     title: "snikers",
+//     price: "29.9",
+//     image:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg4BK_hUxmAf_6--dz_DRtEddqGYdt48nj4Q&usqp=CAU",
+//     description: "description about bread",
+//   },
+// ];
+
+const socket = io.connect("http://localhost:3001");
 
 function App() {
   const auth = useContext(DataContext);
@@ -174,7 +177,7 @@ function App() {
               />
             </Routes>
           </div>
-          <Footer />
+          <Footer socket={socket} />
         </div>
       </Router>
     </DataContext.Provider>
