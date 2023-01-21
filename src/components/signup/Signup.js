@@ -12,7 +12,7 @@ import "./Signup.css";
 function Signup() {
   const navigate = useNavigate();
   const auth = useContext(DataContext);
-  const [firstTime, setFirstTime] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
   const [validName, setValidName] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -51,29 +51,51 @@ function Signup() {
   ];
 
   const signUpHandler = async () => {
-    setFirstTime(true);
+    setFirstTime(false);
     let name = userName.current.value;
     let password = userPassword.current.value;
     let email = userEmail.current.value;
     if (name.length !== 0) {
       setValidName(true);
     }
-    if (password.length > 5) {
+
+    if (name.length === 0) {
+      setValidName(false);
+    }
+
+    if (password.length > 6) {
       setValidPassword(true);
     }
+
+    if (password.length < 6) {
+      setValidPassword(false);
+    }
+
     if (validator.isEmail(email)) {
       setValidEmail(true);
     }
 
-    if (validName && validPassword && validEmail) {
-      auth.login();
+    if (!validator.isEmail(email)) {
+      setValidEmail(false);
+    }
 
+    if (!firstTime && validName && validPassword && validEmail) {
+      auth.login();
       navigate("/");
     }
   };
   return (
     <div className="login">
       <h1>Sign Up</h1>
+      <input
+        className="login__email"
+        type="email"
+        placeholder="email"
+        ref={userEmail}
+      />
+      {firstTime && !validEmail && (
+        <p className="login__valid">Please enter correct email</p>
+      )}
       <input
         className="login__userName"
         type="text"
@@ -93,15 +115,6 @@ function Signup() {
         <p className="login__valid">
           Please enter a password longer than 6 characters{" "}
         </p>
-      )}
-      <input
-        className="login__email"
-        type="email"
-        placeholder="email"
-        ref={userEmail}
-      />
-      {firstTime && !validEmail && (
-        <p className="login__valid">Please enter correct email</p>
       )}
 
       <div className="signup__radio">

@@ -3,29 +3,41 @@ import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
 import { useHttpClient } from "../../Hook/HttppHook";
 import { DataContext } from "../../context/data-context";
+import validator from "validator";
 
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
   const auth = useContext(DataContext);
-  const [validName, setValidName] = useState(true);
+  const [firstTime, setFirstTime] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
-  const userName = useRef({ value: "" });
+  const userEmail = useRef({ value: "" });
   const userPassword = useRef({ value: "" });
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const loginHandler = async () => {
-    let name = userName.current.value;
+    let email = userEmail.current.value;
     let password = userPassword.current.value;
-    if (name.length == 0) {
-      setValidName(false);
+
+    setFirstTime(false);
+
+    if (!validator.isEmail(email)) {
+      setValidEmail(false);
+    }
+
+    if (validator.isEmail(email)) {
+      setValidEmail(true);
     }
     if (password.length < 6) {
       setValidPassword(false);
     }
+    if (password.length > 6) {
+      setValidPassword(true);
+    }
 
-    if (!validName && !validPassword) {
+    if (!firstTime && validEmail && validPassword) {
       auth.login();
       navigate("/");
     }
@@ -37,10 +49,10 @@ function Login() {
       <input
         className="login__userName"
         type="text"
-        placeholder="user name"
-        ref={userName}
+        placeholder="email"
+        ref={userEmail}
       />
-      {!validName && <p className="login__valid">Please enter your name</p>}
+      {!validEmail && <p className="login__valid">Please enter valid email</p>}
       <input
         className="login__password"
         type="text"
