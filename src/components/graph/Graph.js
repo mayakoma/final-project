@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import "./Graph.css";
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
+import { Bar } from "react-chartjs-2";
+
 
 
 function Graph() {
@@ -13,39 +15,58 @@ function Graph() {
     //     { year: 2015, count: 30 },
     //     { year: 2016, count: 28 },
     //   ]);
+     const arr= [{ productName: "cake1", count: 10 },
+        { productName: "cake2", count: 20 },
+        { productName: "cake3", count: 15 },
+        { productName: "cake4", count: 25 },
+        { productName: "cake5", count: 22 },
+        { productName: "cake6", count: 30 },
+        { productName: "cake7", count: 28 }];
 
-    // new Chart(
-    //     document.getElementById('acquisitions'),
-    //     {
-    //       type: 'bar',
-    //       options: {
-    //         animation: false,
-    //         plugins: {
-    //           legend: {
-    //             display: false
-    //           },
-    //           tooltip: {
-    //             enabled: false
-    //           }
-    //         }
-    //       },
-    //       data: {
-    //         labels: data.map(row => row.year),
-    //         datasets: [
-    //           {
-    //             label: 'Acquisitions by year',
-    //             data: data.map(row => row.count)
-    //           }
-    //         ]
-    //       }
-    //     }
-    //   );
+    const data = {
+        labels: arr.map((e) => e.productName),
+        datasets: [
+          {
+            label: "year",
+            data: arr.map((row) => row.count),
+            backgroundColor: [
+              "rgba(75,192,192,1)",
+              "#ecf0f1",
+              "#50AF95",
+              "#f3ba2f",
+              "#2a71d0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
+      };
+    const [dataChart, setData]=useState(data);
 
+    // useEffect(() => {
+    //     setData();
+    //   }, []);
+
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "top",
+          },
+          title: {
+            display: true,
+            text: "Product Type By Quantity",
+          },
+        },
+      };
+
+   
     
 
    
     return (
-       <div>graph
+       <div style={{ width: 700 }}>graph
+        <Bar data={dataChart} options={options}/>
         
        </div>
     );
