@@ -27,6 +27,8 @@ function App() {
             <Route path="/graph" element={<Graph/>} />
           </Routes>
         </div>
+        <Route path="/graph" element={<Graph/>} />
+
         <Footer />
       </div>
     </Router>
