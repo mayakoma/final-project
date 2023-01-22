@@ -27,7 +27,7 @@ function Graph() {
         labels: arr.map((e) => e.productName),
         datasets: [
           {
-            label: "year",
+            label: "product",
             data: arr.map((row) => row.count),
             backgroundColor: [
               "rgba(214, 205, 159,1)",
