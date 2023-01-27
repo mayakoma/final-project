@@ -103,27 +103,39 @@ function ShowDetails({ list }) {
           list.map((l, i) => (
             <li key={i} className="showDetails_userItem">
               <div className="showDetails_info">
-                <p>email: {l.email}</p>
-                <p>user Name: {l.userName}</p>
-                <p>Area: {l.area}</p>
-                <p>Gender: {l.gender}</p>
+                <p>
+                  <strong>email:</strong> {l.email}
+                </p>
+                <p>
+                  <strong>user Name:</strong> {l.userName}
+                </p>
+                <p>
+                  <strong>Area: </strong>
+                  {l.area}
+                </p>
+                <p>
+                  <strong>Gender: </strong>
+                  {l.gender}
+                </p>
               </div>
-              <button
-                className="showDetails_delBtn"
-                onClick={function () {
-                  deleteObject(l._id);
-                }}
-              >
-                delete
-              </button>
-              <button
-                className="showDetails_delBtn"
-                onClick={() => {
-                  editHandler(l);
-                }}
-              >
-                edit
-              </button>
+              <div className="buttons">
+                <button
+                  className="showDetails_delBtn"
+                  onClick={function () {
+                    deleteObject(l._id);
+                  }}
+                >
+                  delete
+                </button>
+                <button
+                  className="showDetails_delBtn"
+                  onClick={() => {
+                    editHandler(l);
+                  }}
+                >
+                  edit
+                </button>
+              </div>
             </li>
           ))}
       </ul>

@@ -27,15 +27,28 @@ function ShowOrders({ list }) {
         {list.map((l, i) => (
           <li key={i} className="showOrders_orderItem">
             <div className="showOrders_info">
-              <p>orderNumber: {l.orderDetailes._id}</p>
-              <p>Date: {l.orderDetailes.orderDate}</p>
-              <p>address: {l.orderDetailes.address}</p>
-              <p>total Price: {l.orderDetailes.totalPrice}</p>
+              <p>
+                <strong>Order Number:</strong> {l.orderDetailes._id}
+              </p>
+              <p>
+                <strong>Date: </strong>
+                {l.orderDetailes.orderDate}
+              </p>
+              <p>
+                {" "}
+                <strong>Address: </strong>
+                {l.orderDetailes.address}
+              </p>
+              <p>
+                {" "}
+                <strong>Total Price: </strong>
+                {l.orderDetailes.totalPrice}
+              </p>
             </div>
             <div className="ShowDetails_btns">
-              <button className="showDetails_btn">edit</button>
+              <button className="showDetails_delBtn">edit</button>
               <button
-                className="showDetails_btn"
+                className="showDetails_delBtn"
                 onClick={function () {
                   deleteObject(l.orderDetailes._id);
                 }}

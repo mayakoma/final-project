@@ -139,7 +139,7 @@ function AddProductForm() {
       {!firstTime && !validDesc && (
         <p className="valid">Please enter description</p>
       )}
-      <Button onClick={submit} title="Add product" />
+      <Button className="update_btn" onClick={submit} title="Add product" />
       <Modal
         open={open}
         onClose={() => closeModal()}

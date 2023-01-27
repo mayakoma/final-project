@@ -36,8 +36,8 @@ function Admin() {
   }, [sendRequest, usersList, ordersList]);
 
   return (
-    <div>
-      <h1 className="Admin_title"> Setting Page</h1>
+    <div className="admin">
+      <h1 className="Admin_title"> Admin Page</h1>
       <div className="Admin_userSearchContenier">
         <h3 className="Admin_userSearchTitle">Search Users:</h3>
         <div className="Admin_userSearch">

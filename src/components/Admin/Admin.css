@@ -1,20 +1,84 @@
+.admin {
+  font-family: "PT Sans", serif;
+}
+
 .Admin_title {
   color: black;
   width: 100%;
-  font-family: "Shadows Into Light", cursive;
   font-size: 6rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: "PT Sans", serif;
+  margin-top: 20px;
 }
 .Admin_userSearchContenier,
 .Admin_ordersSearchContenier {
   display: flex;
   margin: auto;
-  width: 50%;
+  width: 60%;
 }
+
+.Search_button {
+  cursor: pointer;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.Admin_usersInfo {
+  /* display: flex; */
+  margin: auto;
+  width: auto;
+  height: fit-content;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  /* justify-content: space-between; */
+  padding: 0 15px;
+  flex-wrap: wrap;
+}
+
+.showDetails {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  letter-spacing: 0.4px;
+}
+
+.showDetails_info {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+}
+
+.showDetails_delBtn {
+  background-color: rgba(58, 56, 56, 0.831);
+  /* flex: 20%; */
+  border-radius: 3rem;
+  padding: 0.8rem 1rem;
+  width: 100px;
+  /* height: 40px; */
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+
+.showDetails_delBtn:hover {
+  background-color: rgba(255, 255, 255, 0.831);
+}
+/* ../ */
+
 .Admin_userSearchTitle,
 .Admin_ordersSearchTitle {
-  flex: 35%;
-  font-family: "Shadows Into Light", cursive;
   font-size: 3rem;
+  font-weight: 300;
 }
 .Admin_userSearch,
 .Admin_ordersSearch {
@@ -24,69 +88,60 @@
 .Admin_Search {
   width: 100%;
 }
-.Admin_usersInfo {
-  margin: auto;
-  display: flex;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  justify-content: space-evenly;
-  padding: 32px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
+
 .showDetails_userItem {
   margin-top: 1rem;
   text-align: left;
   display: flex;
   flex-direction: column;
   flex: 50%;
-  height: 10rem;
+  border: 1px solid black;
+  padding: 15px 5px;
 }
-.showDetails_info {
-  flex: 80%;
-  margin-bottom: 20px;
-}
+
 .ShowDetails_btns {
-  flex: 20%;
+  margin-top: 10px;
   display: flex;
-  gap: 2rem;
   flex-direction: row;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  justify-content: center;
 }
 .showDetails_btn {
-  flex: 50%;
+  /* flex: 50%; */
+  display: flex;
+  justify-content: center;
   border-radius: 2rem;
   width: 1rem;
 }
-.showDetails {
-  display: flex;
-  flex: 50%;
-  flex-direction: row;
-  gap: 1rem;
-}
-.showDetails_delBtn {
-  flex: 20%;
-  border-radius: 3rem;
-  width: 7rem;
-  /* margin-right: 8rem; */
-}
+
 .Admin_ordersInfo {
-  width: 70%;
+  width: 100%;
   margin: auto;
-  margin-top: 2rem;
+  margin-top: 5rem;
 }
 .showOrders {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
+  justify-content: space-evenly;
+  width: 100%;
+  /* gap: 1rem; */
 }
 .showOrders_orderItem {
-  flex: 50%;
+  border: 1px solid black;
+  padding: 15px 5px;
+  /* flex: 70%; */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  text-align: center;
+}
+
+.showOrders p {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.4px;
 }
 .showOrders_info {
   flex: 70%;
 }
+
+/* font-family: "Shadows Into Light", cursive; */
