@@ -75,7 +75,7 @@ function ShowDetails({ list }) {
 
   const updateUser = async () => {
     const name = userName.current.value;
-
+    console.log("name");
     try {
       const responseData = await sendRequest(
         `http://localhost:3001/user/update`,
