@@ -120,18 +120,6 @@ function App() {
     setIsAdmin(false);
   }, []);
 
-  // const getMovieRequest = async (searchValue = "") => {
-  //   const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=132d50a3`;
-
-  //   const response = await fetch(url);
-  //   const responseJson = await response.json();
-  //   console.log(responseJson);
-  //   if (responseJson.Search) {
-  //     setMovies(responseJson.Search);
-  //     console.log(responseJson.Search);
-  //   }
-  // };
-
   const addToList = useCallback(async (searchFilter) => {
     try {
       const responseData = await sendRequest(

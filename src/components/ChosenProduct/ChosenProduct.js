@@ -5,15 +5,12 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { useHttpClient } from "../../Hook/HttppHook";
 import { DataContext } from "../../context/data-context";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import ToggleButton from "react-bootstrap/ToggleButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import Button from "../Button/Button";
 import "./ChosenProduct.css";
-import { async } from "q";
 
 const style = {
   position: "absolute",
@@ -72,12 +69,17 @@ function ChosenProduct(props) {
     console.log(productEl);
   }, []);
 
-  const closeModal = () => {
-    setOpenDel(false);
-  };
+  // const closeModal = async () => {
+  //   setOpen(false);
+  //   data.addToList("");
+  //   navigate("/");
+  // };
 
   const closeModalDel = () => {
     setOpenDel(false);
+    setOpen(false);
+    console.log("close");
+    data.addToList("");
     navigate("/");
   };
 
@@ -229,7 +231,7 @@ function ChosenProduct(props) {
       </div>
       <Modal
         open={open}
-        onClose={() => closeModal()}
+        onClose={() => closeModalDel()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

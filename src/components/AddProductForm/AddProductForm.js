@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useHttpClient } from "../../Hook/HttppHook";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { DataContext } from "../../context/data-context";
+
 import "./AddProductForm.css";
 
 const style = {
@@ -25,6 +27,8 @@ const style = {
 
 function AddProductForm() {
   const navigate = useNavigate();
+  const data = useContext(DataContext);
+
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [validName, setValidName] = useState(true);
   const [validPrice, setValidPrice] = useState(true);
@@ -40,6 +44,7 @@ function AddProductForm() {
 
   const closeModal = () => {
     setOpen(false);
+    data.addToList("");
   };
 
   const submit = async () => {
@@ -100,7 +105,6 @@ function AddProductForm() {
         // img = "";
         // description = "";
         setOpen(true);
-
         navigate("/admin");
       } catch (err) {}
     }
@@ -143,7 +147,7 @@ function AddProductForm() {
       {!firstTime && !validDesc && (
         <p className="valid">Please enter description</p>
       )}
-      <Button className="update_btn" onClick={submit} title="Add product" />
+      <Button className="update_btn" onClick={submit} title="Add" />
       <Modal
         open={open}
         onClose={() => closeModal()}

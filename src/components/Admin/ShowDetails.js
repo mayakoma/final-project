@@ -60,7 +60,6 @@ function ShowDetails({ list }) {
   };
 
   const editHandler = (l) => {
-    console.log("edittt");
     setUserEdit(l);
     console.log(l);
     console.log(userEdit);
@@ -121,19 +120,19 @@ function ShowDetails({ list }) {
               <div className="buttons">
                 <button
                   className="showDetails_delBtn"
-                  onClick={function () {
-                    deleteObject(l._id);
-                  }}
-                >
-                  delete
-                </button>
-                <button
-                  className="showDetails_delBtn"
                   onClick={() => {
                     editHandler(l);
                   }}
                 >
                   edit
+                </button>
+                <button
+                  className="showDetails_delBtn"
+                  onClick={function () {
+                    deleteObject(l._id);
+                  }}
+                >
+                  delete
                 </button>
               </div>
             </li>

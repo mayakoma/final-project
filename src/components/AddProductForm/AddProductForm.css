@@ -33,3 +33,7 @@ input {
 .update_btn {
   background-color: rgba(58, 56, 56, 0.831);
 }
+
+button {
+  width: 10rem;
+}
