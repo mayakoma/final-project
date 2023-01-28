@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useStateValue } from "../../context/StateProvider";
 import { useHttpClient } from "../../Hook/HttppHook";
+import { DataContext } from "../../context/data-context";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Box from "@mui/material/Box";
@@ -12,6 +13,7 @@ import Modal from "@mui/material/Modal";
 
 import Button from "../Button/Button";
 import "./ChosenProduct.css";
+import { async } from "q";
 
 const style = {
   position: "absolute",
@@ -19,7 +21,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 400,
+  height: 300,
   bgcolor: "background.paper",
   border: "3px solid #000",
   boxShadow: 24,
@@ -33,9 +35,15 @@ function ChosenProduct(props) {
   const [state, dispatch] = useStateValue();
   const [productEl, setProductEl] = useState("");
   const [open, setOpen] = useState(false);
-  const title = useRef({ value: "" });
-  const price = useRef({ value: "" });
-  const description = useRef({ value: "" });
+  const [firstTime, setFirstTime] = useState(true);
+  const [validName, setValidName] = useState(true);
+  const [validPrice, setValidPrice] = useState(true);
+  const [validDesc, setValidDesc] = useState(true);
+  const navigate = useNavigate();
+  const titleRef = useRef({ value: "" });
+  const priceRef = useRef({ value: "" });
+  const descriptionRef = useRef({ value: "" });
+  const data = useContext(DataContext);
 
   const index = useParams().index;
   // const productFromList = props.products.find((p) => p._id === index);
@@ -48,6 +56,58 @@ function ChosenProduct(props) {
 
   const closeModal = () => {
     setOpen(false);
+  };
+
+  const updateProduct = async () => {
+    let name = titleRef.current.value;
+    let description = descriptionRef.current.value;
+    let price = priceRef.current.value;
+
+    setFirstTime(false);
+
+    if (name.length === 0) {
+      setValidName(false);
+    }
+    if (name.length !== 0) {
+      setValidName(true);
+    }
+    if (price.length === 0) {
+      setValidPrice(false);
+    }
+    if (price.length !== 0) {
+      setValidPrice(true);
+    }
+
+    if (description.length === 0) {
+      setValidDesc(false);
+    }
+    if (description.length !== 0) {
+      setValidDesc(true);
+    }
+
+    if (!firstTime && validName && validPrice && validDesc) {
+      console.log(`name: ${name} price: ${price} description: ${description}`);
+      try {
+        const responseData = await sendRequest(
+          `http://localhost:3001/product/update`,
+          "POST",
+          JSON.stringify({
+            pid: productEl._id,
+            title: name,
+            description: description,
+            price: price,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        navigate("/");
+        console.log(responseData);
+        name = "";
+        price = "";
+        description = "";
+      } catch (err) {}
+    }
   };
 
   const getProduct = async () => {
@@ -111,11 +171,13 @@ function ChosenProduct(props) {
           >
             <FaShoppingCart className="basken__icon" />
           </Button>
-          <Button
-            className="chosenProduct__button"
-            title="Edit Product"
-            onClick={openForm}
-          ></Button>
+          {data.isAdmin && (
+            <Button
+              className="chosenProduct__button"
+              title="Edit Product"
+              onClick={openForm}
+            ></Button>
+          )}
         </div>
       </div>
       <Modal
@@ -126,50 +188,30 @@ function ChosenProduct(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="div" component="div">
+            <div>Update Product</div>
+          </Typography>
+          <Typography id="modal-modal-title" variant="div" component="div">
             <input
               className="title"
               type="text"
               placeholder={productEl.title}
-              ref={title}
+              ref={titleRef}
             />
             <input
               className="description"
               type="text"
               placeholder={productEl.description}
-              ref={description}
+              ref={descriptionRef}
             />
             <input
               className="price"
               type="text"
               placeholder={productEl.price}
-              ref={description}
+              ref={priceRef}
             />
           </Typography>
           <Typography id="modal-modal-title" variant="div" component="div">
-            {/* <div className="signup__radio">
-              <p className="signup__radio-title">Area : </p>
-              <ButtonGroup size="sm" className="buttons">
-                {radios2.map((radio2, idx) => (
-                  <ToggleButton
-                    size="small"
-                    className="toggle2"
-                    key={idx}
-                    id={`radio-${idx}`}
-                    type="radio"
-                    variant={idx % 2 ? "outline-success" : "outline-danger"}
-                    name="radio"
-                    value={radio2.value}
-                    checked={radioArea === radio2.value}
-                    onChange={(e) => changeRadioArea(e)}
-                  >
-                    {radio2.name}
-                  </ToggleButton>
-                ))}
-              </ButtonGroup>
-            </div> */}
-          </Typography>
-          <Typography id="modal-modal-title" variant="div" component="div">
-            <button onClick={() => {}}>update</button>
+            <Button onClick={updateProduct} title="update" />
           </Typography>
         </Box>
       </Modal>

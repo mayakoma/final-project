@@ -91,10 +91,14 @@ function AddProductForm() {
           }
         );
         console.log(responseData);
-        name = "";
-        price = "";
-        img = "";
-        description = "";
+        productName.current.value = "";
+        productPrice.current.value = "";
+        productDescription.current.value = "";
+        productImgSrc.current.value = "";
+        // name = "";
+        // price = "";
+        // img = "";
+        // description = "";
         setOpen(true);
 
         navigate("/admin");

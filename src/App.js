@@ -14,8 +14,6 @@ import React, {
   useEffect,
 } from "react";
 import { useHttpClient } from "./Hook/HttppHook";
-// import { Navigate } from "react-router-dom";
-
 import Checkout from "./components/Checkout/Checkout";
 import Footer from "./components/footer/footer";
 import List from "./components/list/List";
@@ -104,6 +102,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [list, setList] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -120,6 +119,18 @@ function App() {
   const adminOut = useCallback(() => {
     setIsAdmin(false);
   }, []);
+
+  const getMovieRequest = async (searchValue = "") => {
+    const url = `http://www.omdbapi.com/?s=${searchValue}&apikey=132d50a3`;
+
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    console.log(responseJson);
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+      console.log(responseJson.Search);
+    }
+  };
 
   const addToList = useCallback(async (searchFilter) => {
     try {
@@ -141,6 +152,7 @@ function App() {
 
   useEffect(() => {
     addToList("");
+    getMovieRequest("");
   }, []);
 
   return (
