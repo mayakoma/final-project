@@ -31,10 +31,28 @@ const style = {
   fontFamily: "monospace",
 };
 
+const style2 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 500,
+  height: 200,
+  bgcolor: "background.paper",
+  border: "3px solid #000",
+  boxShadow: 24,
+  p: 4,
+  fontSize: "large",
+  fontSize: "30px",
+  fontFamily: "monospace",
+};
+
 function ChosenProduct(props) {
   const [state, dispatch] = useStateValue();
   const [productEl, setProductEl] = useState("");
   const [open, setOpen] = useState(false);
+  const [openDel, setOpenDel] = useState(false);
+
   const [firstTime, setFirstTime] = useState(true);
   const [validName, setValidName] = useState(true);
   const [validPrice, setValidPrice] = useState(true);
@@ -55,7 +73,29 @@ function ChosenProduct(props) {
   }, []);
 
   const closeModal = () => {
-    setOpen(false);
+    setOpenDel(false);
+  };
+
+  const closeModalDel = () => {
+    setOpenDel(false);
+    navigate("/");
+  };
+
+  const deleteProduct = async () => {
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:3001/product/delete`,
+        "DELETE",
+        JSON.stringify({
+          pid: productEl._id,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      setOpenDel(true);
+      console.log(responseData);
+    } catch (err) {}
   };
 
   const updateProduct = async () => {
@@ -172,11 +212,18 @@ function ChosenProduct(props) {
             <FaShoppingCart className="basken__icon" />
           </Button>
           {data.isAdmin && (
-            <Button
-              className="chosenProduct__button"
-              title="Edit Product"
-              onClick={openForm}
-            ></Button>
+            <>
+              <Button
+                className="chosenProduct__button"
+                title="Edit"
+                onClick={openForm}
+              ></Button>
+              <Button
+                className="chosenProduct__button"
+                title="Delete"
+                onClick={deleteProduct}
+              ></Button>
+            </>
           )}
         </div>
       </div>
@@ -212,6 +259,18 @@ function ChosenProduct(props) {
           </Typography>
           <Typography id="modal-modal-title" variant="div" component="div">
             <Button onClick={updateProduct} title="update" />
+          </Typography>
+        </Box>
+      </Modal>
+      <Modal
+        open={openDel}
+        onClose={() => closeModalDel()}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style2}>
+          <Typography id="modal-modal-title" variant="h3" component="h3">
+            <h3>The product deleted</h3>
           </Typography>
         </Box>
       </Modal>
