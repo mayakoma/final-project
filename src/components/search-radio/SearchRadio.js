@@ -9,25 +9,29 @@ import "./SearchRadio.css";
 const SearchRadio = function () {
   const data = useContext(DataContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  const [radioGender, setRadioGender] = useState("women");
-  const [radioArea, setRadioArea] = useState("north");
+  const [radioGender, setRadioGender] = useState("all");
+  const [radioArea, setRadioArea] = useState("all");
 
   const changeRadioGender = (e) => {
     setRadioGender(e.currentTarget.value);
+    data.setGender(e.currentTarget.value);
     console.log(e.currentTarget.value);
   };
 
   const changeRadioArea = (e) => {
     setRadioArea(e.currentTarget.value);
+    data.setArea(e.currentTarget.value);
     console.log(e.currentTarget.value);
   };
 
   const radios1 = [
-    { name: "women", value: "women" },
+    { name: "all", value: "all" },
+    { name: "wonem", value: "women" },
     { name: "men", value: "men" },
   ];
 
   const radios2 = [
+    { name: "all", value: "all" },
     { name: "north", value: "north" },
     { name: "center", value: "center" },
     { name: "south", value: "south" },

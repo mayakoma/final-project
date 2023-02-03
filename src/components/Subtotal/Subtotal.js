@@ -11,43 +11,49 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import validator from "validator";
 import { DataContext } from "../../context/data-context";
+import { useHttpClient } from "../../Hook/HttppHook";
 
 function Subtotal() {
   const [{ basket }, dispatch] = useStateValue();
   const auth = useContext(DataContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const nameRef = useRef({ value: "" });
-  const emailRef = useRef({ value: "" });
+  const addressRef = useRef({ value: "" });
+  // const emailRef = useRef({ value: "" });
   const navigate = useNavigate();
-  const name = nameRef.current.value;
-  const email = emailRef.current.value;
+
+  // const email = emailRef.current.value;
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 
   const checkoutDone = async () => {
-    if (name !== "" && validator.isEmail(email) && basket.length > 0) {
-      basket.map((item) => {
-        dispatch({
-          type: "REMOVE_FROM_BASKET",
-          title: item.title,
-        });
+    const addressVal = addressRef.current.value;
+    basket.map((item) => {
+      dispatch({
+        type: "REMOVE_FROM_BASKET",
+        title: item.title,
       });
-      console.log("done");
-      console.log(basket);
-      setOpen(true);
-    }
+    });
 
-    if (auth.isLoggedIn && basket.length > 0) {
-      basket.map((item) => {
-        dispatch({
-          type: "REMOVE_FROM_BASKET",
-          title: item.title,
-        });
-      });
-      console.log("done");
-      console.log(basket);
-      setOpen(true);
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:3001/order/add`,
+        "POST",
+        JSON.stringify({
+          userId: auth.userId,
+          productsList: basket,
+          address: addressVal,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (err) {
+      console.log(err);
     }
+    console.log("done");
+    console.log(basket);
+    setOpen(true);
   };
 
   const closeModal = () => {
@@ -77,9 +83,9 @@ function Subtotal() {
         Subtotal ({getBasketItemAmount(basket)} items):{" "}
         <strong>$ {getBasketTotal(basket).toFixed(2)}</strong>
       </p>
-      {!auth.isLoggedIn && (
+      {!auth.isLoggedIn ? (
         <div className="subtotal__details">
-          <label className="subtotal__name">Name</label>
+          {/* <label className="subtotal__name">Name</label>
           <input
             className="subtotal__name-input"
             type="text"
@@ -92,15 +98,26 @@ function Subtotal() {
             type="text"
             ref={emailRef}
             placeholder="enter your email"
-          />
+          /> */}
+          <p>you need to sign in</p>
         </div>
+      ) : (
+        <>
+          {/* <label className="subtotal__address">Address for delievery</label> */}
+          <input
+            className="subtotal__address-input"
+            type="text"
+            ref={addressRef}
+            placeholder="enter your address"
+          />
+          <Button
+            title="Checkout"
+            onClick={checkoutDone}
+            className="checkout__button"
+          />
+        </>
       )}
 
-      <Button
-        title="Checkout"
-        onClick={checkoutDone}
-        className="checkout__button"
-      />
       <Modal
         open={open}
         onClose={() => closeModal()}

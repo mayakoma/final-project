@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./footer.css";
 import { io } from "socket.io-client";
+import { DataContext } from "../../context/data-context";
 
 const Footer = function ({ socket }) {
+  const data = useContext(DataContext);
   const [users, setUsers] = useState(0);
 
   useEffect(() => {
@@ -10,7 +12,12 @@ const Footer = function ({ socket }) {
       setUsers(users);
     });
   }, [users, socket]);
-  return <div className="footer">number of users {users} </div>;
+  return (
+    <div className="footer">
+      {" "}
+      {data.isAdmin && <p>number of users {users}</p>}{" "}
+    </div>
+  );
 };
 
 export default Footer;

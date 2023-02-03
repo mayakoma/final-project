@@ -47,6 +47,21 @@ function Login() {
     }
 
     if (!firstTime && validEmail && validPassword) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/user/login",
+          "POST",
+          JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData.user._id);
+        auth.setUserId(responseData.user._id);
+      } catch (err) {}
       signInWithEmailAndPassword(authFirebase, email, password)
         .then((userCredential) => {
           console.log(userCredential);

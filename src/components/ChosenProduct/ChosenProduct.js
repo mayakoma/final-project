@@ -203,7 +203,7 @@ function ChosenProduct(props) {
           <div className="chosenProduct__description">
             {productEl.description}
           </div>
-          <div className="chosenProduct__price">price : {productEl.price}$</div>
+          <div className="chosenProduct__price">price : {productEl.price}₪</div>
         </div>
         <div className="buttons">
           <Button

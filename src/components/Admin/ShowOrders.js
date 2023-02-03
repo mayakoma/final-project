@@ -1,9 +1,10 @@
 import Button from "../Button/Button";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useHttpClient } from "../../Hook/HttppHook";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { DataContext } from "../../context/data-context";
 
 const style = {
   position: "absolute",
@@ -25,7 +26,7 @@ function ShowOrders({ list }) {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [open, setOpen] = useState(false);
   const [orderEditId, setOrderEditId] = useState({});
-
+  const data = useContext(DataContext);
   const addressRef = useRef({ value: "" });
 
   const deleteObject = async (objId) => {
@@ -41,6 +42,7 @@ function ShowOrders({ list }) {
         }
       );
       console.log(responseData);
+      data.setIsChange(true);
     } catch (err) {}
   };
 
@@ -69,6 +71,7 @@ function ShowOrders({ list }) {
         }
       );
       closeModal();
+      data.setIsChange(true);
     } catch (err) {
       console.log(err);
     }
@@ -83,28 +86,28 @@ function ShowOrders({ list }) {
             <li key={i} className="showOrders_orderItem">
               <div className="showOrders_info">
                 <p>
-                  <strong>Order Number:</strong> {l.orderDetailes._id}
+                  <strong>Order Number:</strong> {l._id}
                 </p>
                 <p>
                   <strong>Date: </strong>
-                  {l.orderDetailes.orderDate}
+                  {l.orderDate}
                 </p>
                 <p>
                   {" "}
                   <strong>Address: </strong>
-                  {l.orderDetailes.address}
+                  {l.address}
                 </p>
                 <p>
                   {" "}
                   <strong>Total Price: </strong>
-                  {l.orderDetailes.totalPrice}
+                  {l.totalPrice}
                 </p>
               </div>
               <div className="ShowDetails_btns">
                 <button
                   className="showDetails_delBtn"
                   onClick={() => {
-                    editOrder(l.orderDetailes);
+                    editOrder(l);
                   }}
                 >
                   edit
@@ -112,7 +115,7 @@ function ShowOrders({ list }) {
                 <button
                   className="showDetails_delBtn"
                   onClick={function () {
-                    deleteObject(l.orderDetailes._id);
+                    deleteObject(l._id);
                   }}
                 >
                   delete

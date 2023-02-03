@@ -24,8 +24,8 @@ import ChosenProduct from "./components/ChosenProduct/ChosenProduct";
 import Admin from "./components/Admin/Admin";
 import { DataContext } from "./context/data-context";
 import { io } from "socket.io-client";
-
 import { AddCommentOutlined } from "@mui/icons-material";
+import List2 from "./components/list/List copy";
 
 // const productsList = [
 //   {
@@ -102,7 +102,15 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [list, setList] = useState([]);
-  const [movies, setMovies] = useState([]);
+  const [pokemons, setPokemons] = useState([]);
+  const [area, setarea] = useState("");
+  const [gender, setgender] = useState("");
+  const [isChange, setisChange] = useState(false);
+  const [userid, setUserid] = useState("");
+
+  const setIsChange = (flag) => {
+    setisChange(flag);
+  };
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -112,12 +120,24 @@ function App() {
     setIsLoggedIn(false);
   }, []);
 
+  const setId = useCallback((uid) => {
+    setUserid(uid);
+  }, []);
+
   const adminIn = useCallback(() => {
     setIsAdmin(true);
   }, []);
 
   const adminOut = useCallback(() => {
     setIsAdmin(false);
+  }, []);
+
+  const setGender = useCallback((gender) => {
+    setgender(gender);
+  }, []);
+
+  const setArea = useCallback((area) => {
+    setarea(area);
   }, []);
 
   const addToList = useCallback(async (searchFilter) => {
@@ -132,14 +152,77 @@ function App() {
           "Content-Type": "application/json",
         }
       );
-      setList(responseData);
+      setPokemons(responseData);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
+  const getData = async () => {
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:3001/product/getProducts`
+      );
+      setPokemons(responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const sendToServer = async (pokemon) => {
+    try {
+      const responseData = await sendRequest(
+        `http://localhost:3001/product/add`,
+        "POST",
+        JSON.stringify({
+          index: pokemon.index,
+          title: pokemon.name,
+          description: `defense: ${pokemon.defense}, height:${pokemon.height}, attack: ${pokemon.attack}`,
+          image: pokemon.image,
+          price: pokemon.price,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchData = async () => {
+    let index = 0;
+    const res = await fetch(
+      "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=100/"
+    );
+    const data = await res.json();
+    data.results.forEach(async (element, i) => {
+      const pokemonRes = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${element.name}`
+      );
+      const pokemonData = await pokemonRes.json();
+
+      setPokemons((prevPokemons) => [
+        ...prevPokemons,
+        {
+          name: pokemonData.name,
+          type: pokemonData.types[0].type.name,
+          height: pokemonData.height,
+          image: pokemonData.sprites.front_default,
+          attack: pokemonData.stats[0].base_stat,
+          defense: pokemonData.stats[1].base_stat,
+          price: Math.floor(Math.random() * 121) + 30,
+          index: i,
+        },
+      ]);
+    });
+    pokemons.forEach((pokemon) => sendToServer(pokemon));
+  };
+
   useEffect(() => {
-    addToList("");
+    // fetchData();
+    getData();
+    // addToList("");
   }, []);
 
   return (
@@ -148,23 +231,32 @@ function App() {
         isLoggedIn: isLoggedIn,
         login: login,
         logout: logout,
+        gender: gender,
+        area: area,
+        userId: userid,
+        setUserId: setId,
         isAdmin: isAdmin,
         adminIn: adminIn,
         adminOut: adminOut,
         addToList: addToList,
         list: list,
+        setGender: setGender,
+        setArea: setArea,
+        isChange: isChange,
+        setIsChange: setIsChange,
       }}
     >
       <Router>
         <div className="App">
           <Navigation />
           <img
-            src="https://cohanimbakery.co.il/f-users/user_105071/website_105732/images/thumbs/W_960_240a8042_lr.jpg"
+            src="https://wallpaper.dog/large/743770.jpg"
             className="app_img"
           />
           <div className="App_bodyConteiner">
             <Routes>
-              <Route path="/" element={<List products={list} />} />
+              {/* <Route path="/" element={<List products={list} />} /> */}
+              <Route path="/" element={<List2 products={pokemons} />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/login" element={<Login />} />
               <Route path="/admin" element={<Admin />} />

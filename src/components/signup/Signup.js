@@ -90,6 +90,23 @@ function Signup() {
         .catch((error) => {
           console.log(error);
         });
+
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/user/signup",
+          "POST",
+          JSON.stringify({
+            email: email,
+            password: password,
+            userName: name,
+            area: radioArea,
+            gender: radioGender,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+      } catch (err) {}
       navigate("/");
     }
   };

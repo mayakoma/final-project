@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useHttpClient } from "../../Hook/HttppHook";
 import Button from "../Button/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -6,6 +6,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { DataContext } from "../../context/data-context";
 
 const style = {
   position: "absolute",
@@ -26,7 +27,7 @@ const style = {
 function ShowDetails({ list }) {
   const [open, setOpen] = useState(false);
   const [userEdit, setUserEdit] = useState({});
-
+  const data = useContext(DataContext);
   const userName = useRef({ value: "" });
 
   const [radioArea, setRadioArea] = useState("north");
@@ -57,6 +58,7 @@ function ShowDetails({ list }) {
       );
       console.log(responseData);
     } catch (err) {}
+    data.setIsChange(true);
   };
 
   const editHandler = (l) => {
@@ -82,7 +84,6 @@ function ShowDetails({ list }) {
         JSON.stringify({
           userId: userEdit._id,
           userName: name,
-          area: radioArea,
         }),
         {
           "Content-Type": "application/json",
@@ -90,6 +91,7 @@ function ShowDetails({ list }) {
       );
       console.log(responseData.user);
       closeModal();
+      data.setIsChange(true);
     } catch (err) {
       console.log(err);
     }
@@ -153,7 +155,7 @@ function ShowDetails({ list }) {
               ref={userName}
             />
           </Typography>
-          <Typography id="modal-modal-title" variant="div" component="div">
+          {/* <Typography id="modal-modal-title" variant="div" component="div">
             <div className="signup__radio">
               <p className="signup__radio-title">Area : </p>
               <ButtonGroup size="sm" className="buttons">
@@ -175,7 +177,7 @@ function ShowDetails({ list }) {
                 ))}
               </ButtonGroup>
             </div>
-          </Typography>
+          </Typography> */}
           <Typography id="modal-modal-title" variant="div" component="div">
             <button
               onClick={() => {
