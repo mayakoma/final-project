@@ -12,12 +12,7 @@ const Footer = function ({ socket }) {
       setUsers(users);
     });
   }, [users, socket]);
-  return (
-    <div className="footer">
-      {" "}
-      {data.isAdmin && <p>number of users {users}</p>}{" "}
-    </div>
-  );
+  return <div className="footer"> {<p>number of users {users}</p>} </div>;
 };
 
 export default Footer;

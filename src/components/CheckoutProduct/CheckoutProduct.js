@@ -52,17 +52,16 @@ function CheckoutProduct({ title, image, price, amount, id, description }) {
         <p className="checkoutProduct__title">{title}</p>
 
         <div className="checkoutProduct__amountDetils">
-          <Button
+          <button
             onClick={minusOne}
-            title="-"
             className="checkoutProduct__btn checkoutProduct__btn-plus"
-          />
+          >
+            -
+          </button>
           <p className="checkoutProduct__amount">{amount} </p>
-          <Button
-            onClick={plusOne}
-            title="+"
-            className="checkoutProduct__btn"
-          />
+          <button onClick={plusOne} className="checkoutProduct__btn">
+            +
+          </button>
         </div>
         <p className="checkoutProduct__price">
           <small>$</small>

@@ -21,7 +21,13 @@ const Navigation = function () {
   return (
     <div className="navigation">
       <div className="navigation_title">
-        <NavLink to="/">Website's name</NavLink>
+        <NavLink to="/">
+          <img
+            className="logo"
+            src="https://assets.stickpng.com/images/612ce4761b9679000402af1c.png"
+            alt="logo"
+          />
+        </NavLink>
       </div>
       <div className="navigation_search">
         <Search />

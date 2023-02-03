@@ -15,7 +15,7 @@
 }
 
 .product:hover {
-  background-color: #9c9b9a;
+  background-color: hsl(var(--hue), 100%, 50%);
 }
 
 a {

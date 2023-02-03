@@ -13,7 +13,7 @@ const List2 = function ({ products }) {
               title={product.title}
               price={product.price}
               image={product.image}
-              description={`defense: ${product.defense}, height:${product.height}, attack: ${product.attack}`}
+              description={product.description}
             />
           </>
         );

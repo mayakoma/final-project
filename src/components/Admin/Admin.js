@@ -9,6 +9,7 @@ import { DataContext } from "../../context/data-context";
 import "./Admin.css";
 import AddProductForm from "../AddProductForm/AddProductForm";
 import SearchRadio from "../search-radio/SearchRadio";
+import Graph from "../Graph/Graph";
 
 function Admin() {
   const [usersList, setUsersList] = useState([]);
@@ -132,6 +133,7 @@ function Admin() {
         )}
       </div>
       <AddProductForm />
+      <Graph />
     </div>
   );
 }

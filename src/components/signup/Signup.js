@@ -106,6 +106,7 @@ function Signup() {
             "Content-Type": "application/json",
           }
         );
+        auth.setUserId(responseData.user._id);
       } catch (err) {}
       navigate("/");
     }

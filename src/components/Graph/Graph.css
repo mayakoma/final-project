@@ -1,0 +1,30 @@
+.graphContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.chart-container {
+  width: 700px;
+}
+
+/* .chart-container > canvas {
+  background-color: rgba(214, 205, 159, 1);
+} */
+
+.chart-container .ct-series-a .ct-bar {
+  stroke: #d17ff4;
+}
+
+.chart-container .ct-series-b .ct-bar {
+  stroke: #90c8f5;
+}
+
+.chart-container .ct-series-c .ct-bar {
+  stroke: #f6dc7b;
+}
+
+.chart-container .ct-series-d .ct-bar {
+  stroke: #6ef0a5;
+}

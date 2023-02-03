@@ -30,12 +30,14 @@
 .checkoutProduct__btn {
   cursor: pointer;
   background-color: rgb(253, 253, 253);
-  font-size: 1rem;
+  font-size: 2rem;
   border-radius: 5rem;
+  color: black;
   font-weight: 700;
-  padding: 0.5rem;
+  width: 65px;
+
   border: 0.2rem solid black;
-  box-shadow: 0rem 0.5rem 0.5rem rgb(131, 125, 125);
+  /* box-shadow: 0rem 0.5rem 0.5rem rgb(131, 125, 125); */
   font-family: inherit;
 }
 
@@ -65,7 +67,8 @@
 .checkoutProduct__price {
   font-size: 2rem;
   font-weight: 400;
-  margin-top: 0.8rem;
+  /* margin-top: 0.8rem; */
+  margin: 0.8rem auto;
 }
 
 .checkoutProduct__remove {

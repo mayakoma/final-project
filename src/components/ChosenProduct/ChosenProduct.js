@@ -143,12 +143,14 @@ function ChosenProduct(props) {
             "Content-Type": "application/json",
           }
         );
-        navigate("/");
+
         console.log(responseData);
         name = "";
         price = "";
         description = "";
       } catch (err) {}
+      closeModalDel();
+      // navigate("/");
     }
   };
 
@@ -201,9 +203,11 @@ function ChosenProduct(props) {
 
         <div className="chosenProduct__details">
           <div className="chosenProduct__description">
-            {productEl.description}
+            <strong>description :</strong> {productEl.description}
           </div>
-          <div className="chosenProduct__price">price : {productEl.price}₪</div>
+          <div className="chosenProduct__price">
+            <strong>price :</strong> {productEl.price}₪
+          </div>
         </div>
         <div className="buttons">
           <Button
