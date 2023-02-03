@@ -1,0 +1,72 @@
+.subtotal {
+  border: 0.3rem black solid;
+  padding: 3rem;
+  background-color: white;
+  width: 50rem;
+}
+
+p {
+  font-size: 2.2rem;
+}
+
+input {
+  font-size: 1.5rem;
+}
+
+.checkout__button {
+  font-weight: 600;
+  cursor: pointer;
+  margin: auto;
+  background-color: rgb(253, 253, 253);
+  font-size: 2rem;
+  margin-top: 2rem;
+  border-radius: 10rem;
+  padding: 1rem;
+  border: 0.2rem solid #000000;
+  box-shadow: 0rem 0.5rem 0.5rem rgb(131, 125, 125);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: inherit;
+}
+
+.checkout__button:hover {
+  box-shadow: 0rem 0.7rem 0.5rem rgb(131, 125, 125);
+  top: -0.3rem;
+}
+
+.subtotal__details {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  font-size: 2rem;
+  text-align: start;
+  /* margin-top: 2rem; */
+  margin: 2rem auto;
+  font-weight: 600;
+  color: red;
+  text-align: center;
+}
+
+.subtotal__details label {
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.subtotal__details input {
+  font-family: inherit;
+  height: 2.5rem;
+  width: 40rem;
+  padding: 0.5rem;
+}
+
+h3,
+h4 {
+  margin: auto;
+  text-align: center;
+  font-family: "Lato", sans-serif;
+}
+
+h4 {
+  margin-top: 2rem;
+}

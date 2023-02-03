@@ -1,27 +1,83 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Button/Button";
+import { useHttpClient } from "../../Hook/HttppHook";
+import { DataContext } from "../../context/data-context";
+import validator from "validator";
+import { authFirebase } from "../../Firebase/Firebase";
+// import { io } from "socket.io-client";
+
 import "./Login.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+// console.log("io");
+// socket.on
 
 function Login() {
   const navigate = useNavigate();
-  const [validName, setValidName] = useState(true);
+  const auth = useContext(DataContext);
+  const [firstTime, setFirstTime] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
   const [validPassword, setValidPassword] = useState(true);
-  const userName = useRef({ value: "" });
-  const userPassword = useRef({ value: "" });
+  const [userNotFound, setUserNotFound] = useState(false);
 
-  const loginHandler = () => {
-    let name = userName.current.value;
+  const userEmail = useRef({ value: "" });
+  const userPassword = useRef({ value: "" });
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  const loginHandler = async () => {
+    let email = userEmail.current.value;
     let password = userPassword.current.value;
-    if (name.length == 0) {
-      setValidName(false);
+    const emailAdmin = "noyf@gmail.com";
+
+    setFirstTime(false);
+
+    if (!validator.isEmail(email)) {
+      setValidEmail(false);
+    }
+
+    if (validator.isEmail(email)) {
+      setValidEmail(true);
     }
     if (password.length < 6) {
       setValidPassword(false);
     }
+    if (password.length > 6) {
+      setValidPassword(true);
+    }
 
-    if (!validName && !validPassword) {
-      navigate("/");
+    if (!firstTime && validEmail && validPassword) {
+      try {
+        const responseData = await sendRequest(
+          "http://localhost:3001/user/login",
+          "POST",
+          JSON.stringify({
+            email: email,
+            password: password,
+          }),
+          {
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData.user._id);
+        auth.setUserId(responseData.user._id);
+      } catch (err) {}
+      signInWithEmailAndPassword(authFirebase, email, password)
+        .then((userCredential) => {
+          console.log(userCredential);
+          auth.login();
+          if (email == emailAdmin) {
+            auth.adminIn();
+          }
+          // socket.on("login", () => {
+          //   console.log("connect +1");
+          // });
+          navigate("/");
+        })
+        .catch((error) => {
+          setUserNotFound(true);
+          console.log(error);
+        });
     }
   };
 
@@ -31,13 +87,13 @@ function Login() {
       <input
         className="login__userName"
         type="text"
-        placeholder="user name"
-        ref={userName}
+        placeholder="email"
+        ref={userEmail}
       />
-      {!validName && <p className="login__valid">Please enter your name</p>}
+      {!validEmail && <p className="login__valid">Please enter valid email</p>}
       <input
         className="login__password"
-        type="text"
+        type="password"
         placeholder="password"
         ref={userPassword}
       />
@@ -48,6 +104,11 @@ function Login() {
         </p>
       )}
       <Button onClick={loginHandler} title="Log In" />
+      {userNotFound && (
+        <p className="login__valid">
+          The user isn't exist, you need to sign up or your details wrong
+        </p>
+      )}
     </div>
   );
 }

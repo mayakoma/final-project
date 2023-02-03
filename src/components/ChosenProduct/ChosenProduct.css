@@ -1,0 +1,59 @@
+.chosenProduct__container {
+  width: 55%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem;
+}
+
+.chosenProduct__img {
+  width: 250px;
+  margin: auto;
+}
+
+.chosenProduct__back {
+  position: absolute;
+  left: -215px;
+  font-size: 44px;
+}
+
+.chosenProduct__back:hover {
+  left: -222px;
+}
+
+.chosenProduct__title {
+  margin-top: 2rem;
+  font-size: 4rem;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.chosenProduct__details {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.chosenProduct__description {
+  font-size: 2rem;
+  padding: 2rem;
+}
+
+.basken__icon {
+  margin-left: 0.8rem;
+}
+
+.chosenProduct__price {
+  font-size: 2rem;
+}
+@media only screen and (max-width: 900px) {
+  .chosenProduct__details {
+    margin-top: -10rem;
+  }
+}
+
+.buttons {
+  width: 100%;
+}

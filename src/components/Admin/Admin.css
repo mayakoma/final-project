@@ -1,0 +1,169 @@
+.admin {
+  font-family: "PT Sans", serif;
+}
+
+.Admin_title {
+  color: black;
+  width: 100%;
+  font-size: 6rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-family: "PT Sans", serif;
+  margin-top: 20px;
+}
+.Admin_userSearchContenier,
+.Admin_ordersSearchContenier {
+  display: flex;
+  margin: auto;
+  width: 60%;
+  flex-direction: column;
+}
+
+.Admin_userSearchContenier {
+}
+.Search_button {
+  cursor: pointer;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  letter-spacing: 0.1rem;
+}
+
+.Admin_usersInfo {
+  /* display: flex; */
+  margin: auto;
+  width: auto;
+  height: fit-content;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  /* justify-content: space-between; */
+  padding: 0 15px;
+  flex-wrap: wrap;
+}
+
+.showDetails {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  letter-spacing: 0.4px;
+}
+
+.showDetails_info {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+}
+
+.showDetails_delBtn {
+  background-color: rgba(58, 56, 56, 0.831);
+  /* flex: 20%; */
+  border-radius: 3rem;
+  /* padding: 0.8rem 1rem; */
+  width: 100px;
+  /* height: 40px; */
+  cursor: pointer;
+  text-transform: uppercase;
+  margin-right: 1rem;
+}
+
+.showDetails_delBtn:hover {
+  background-color: rgba(255, 255, 255, 0.831);
+}
+/* ../ */
+
+.Admin_userSearchTitle,
+.Admin_ordersSearchTitle {
+  font-size: 3rem;
+  font-weight: 300;
+}
+.Admin_userSearch,
+.Admin_ordersSearch {
+  flex: 65%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.Admin_Search {
+  width: 100%;
+}
+
+.showDetails_userItem {
+  margin-top: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex: 50%;
+  border: 1px solid black;
+  padding: 15px 5px;
+}
+
+.ShowDetails_btns {
+  margin-top: 10px;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center; */
+}
+.showDetails_btn {
+  /* flex: 50%; */
+  display: flex;
+  justify-content: center;
+  border-radius: 2rem;
+  width: 1rem;
+}
+
+.Admin_ordersInfo {
+  width: 100%;
+  margin: auto;
+  margin-top: 2rem;
+}
+.showOrders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  /* gap: 1rem; */
+}
+.showOrders_orderItem {
+  border: 1px solid black;
+  padding: 15px 5px;
+  /* flex: 70%; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.showOrders p {
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.4px;
+}
+.showOrders_info {
+  flex: 70%;
+}
+
+button {
+  margin: 2rem auto;
+  width: 12rem;
+  height: 3rem;
+  font-size: 15px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.831);
+  color: #fff;
+  border-radius: 0.5rem;
+  border: #000 solid;
+}
+button:hover {
+  background-color: rgba(0, 0, 0, 0.406);
+  color: black;
+}
+
+/* font-family: "Shadows Into Light", cursive; */

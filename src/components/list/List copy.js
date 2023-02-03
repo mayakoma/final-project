@@ -2,7 +2,7 @@ import React from "react";
 import Product from "../Product/Product";
 import "./List.css";
 
-const List = function ({ products }) {
+const List2 = function ({ products }) {
   return (
     <div className="product_list">
       {products.map((product) => {
@@ -22,4 +22,4 @@ const List = function ({ products }) {
   );
 };
 
-export default List;
+export default List2;
