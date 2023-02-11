@@ -10,8 +10,17 @@ https://user-images.githubusercontent.com/94534918/216784134-cfce1c6e-5c9d-4ca7-
 
 https://user-images.githubusercontent.com/94534918/216784501-7d1fe9af-9922-45fb-983e-66aa8068690c.mp4
 
-link to the server repositry - 
+link to the server repository - 
 https://github.com/mayakoma/final-project-Backend
+
+<h3>To run the app, please enter the following commands in this order: </h3>
+
+Server:
+1. npm start
+
+
+Client:
+1. npm start
 
 
 
